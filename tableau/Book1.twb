@@ -1,0 +1,957 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20253.25.1210.1815                               -->
+<workbook original-version='18.1' source-build='2025.3.1 (20253.25.1210.1815)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Sheet1 (merged_panel_wide)' inline='true' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='merged_panel_wide' name='excel-direct.1gi2wfe1f1489r114v5571wg78n4'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='/Users/miramansour/Desktop/data-visualization-course-final-project-/data/merged_panel_wide.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.1gi2wfe1f1489r114v5571wg78n4' name='Sheet1' table='[Sheet1$]' type='table'>
+          <columns gridOrigin='A1:K386:no:A1:K386:0' header='yes' outcome='6'>
+            <column datatype='string' name='Country Name' ordinal='0' />
+            <column datatype='string' name='Country Code' ordinal='1' />
+            <column datatype='integer' name='Year' ordinal='2' />
+            <column datatype='real' name='Female Labor Force Participation Rate' ordinal='3' />
+            <column datatype='real' name='Female Unemployment Rate' ordinal='4' />
+            <column datatype='real' name='GDP Growth Rate' ordinal='5' />
+            <column datatype='real' name='GDP per Capita' ordinal='6' />
+            <column datatype='real' name='Girls’ Tertiary Enrollment' ordinal='7' />
+            <column datatype='real' name='Total Fertility Rate' ordinal='8' />
+            <column datatype='real' name='Employed FLFPR' ordinal='9' />
+            <column datatype='real' name='GDP per Capita (sqrt)' ordinal='10' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:K386:no:A1:K386:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Country Name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Country Name]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Country Name</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Country Code</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[Country Code]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Country Code</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Year</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[Year]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Year</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Female Labor Force Participation Rate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Female Labor Force Participation Rate]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Female Labor Force Participation Rate</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Female Unemployment Rate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Female Unemployment Rate]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Female Unemployment Rate</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>GDP Growth Rate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[GDP Growth Rate]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>GDP Growth Rate</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>GDP per Capita</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[GDP per Capita]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>GDP per Capita</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Girls’ Tertiary Enrollment</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Girls’ Tertiary Enrollment]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Girls’ Tertiary Enrollment</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Total Fertility Rate</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Total Fertility Rate]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Total Fertility Rate</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Employed FLFPR</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[Employed FLFPR]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>Employed FLFPR</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>GDP per Capita (sqrt)</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[GDP per Capita (sqrt)]</local-name>
+            <parent-name>[Sheet1]</parent-name>
+            <remote-alias>GDP per Capita (sqrt)</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <precision>15</precision>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;R8&quot;</attribute>
+            </attributes>
+            <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='string' name='[Country Code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='string' name='[Country Name]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+      <column caption='Arab Group' datatype='string' name='[Calculation_Arab_Group]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [Country Code] = &quot;LBN&quot; OR [Country Code] = &quot;JOR&quot; OR [Country Code] = &quot;EGY&quot; OR [Country Code] = &quot;TUN&quot; OR [Country Code] = &quot;MAR&quot; OR [Country Code] = &quot;DZA&quot; THEN &quot;Arab&quot; ELSE &quot;Non-Arab&quot; END' />
+      </column>
+      <column caption='Lebanon Highlight' datatype='string' name='[Calculation_Lebanon_Highlight]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [Country Code] = &quot;LBN&quot; THEN &quot;Lebanon&quot; ELSE &quot;Comparator&quot; END' />
+      </column>
+      <column caption='Unemployed FLFPR Component' datatype='real' name='[Calculation_Unemployed_FLFPR_Component]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[Female Labor Force Participation Rate] - [Employed FLFPR]' />
+      </column>
+      <column caption='Sheet1' datatype='table' name='[__tableau_internal_object_id__].[Sheet1_BBEC63A771374765ABC88DC83E2510CA]' role='measure' type='quantitative' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='/var/folders/vk/h58z5vp10fl2dm0mnskdrxq00000gn/T/tableau-temp/#TableauTemp_1tyjh9n07d3onu14lla191uv66sf.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='04/21/2026 06:32:11 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>Country Name</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Country Name]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Country Name</remote-alias>
+              <ordinal>0</ordinal>
+              <family>Sheet1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>11</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_S2' />
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Country Code</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[Country Code]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Country Code</remote-alias>
+              <ordinal>1</ordinal>
+              <family>Sheet1</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>11</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='1' name='LEN_S2' />
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Year</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[Year]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Year</remote-alias>
+              <ordinal>2</ordinal>
+              <family>Sheet1</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>35</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Female Labor Force Participation Rate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Female Labor Force Participation Rate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Female Labor Force Participation Rate</remote-alias>
+              <ordinal>3</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>382</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Female Unemployment Rate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Female Unemployment Rate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Female Unemployment Rate</remote-alias>
+              <ordinal>4</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>370</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>GDP Growth Rate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[GDP Growth Rate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>GDP Growth Rate</remote-alias>
+              <ordinal>5</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>383</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>GDP per Capita</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[GDP per Capita]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>GDP per Capita</remote-alias>
+              <ordinal>6</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>384</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Girls’ Tertiary Enrollment</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Girls’ Tertiary Enrollment]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Girls’ Tertiary Enrollment</remote-alias>
+              <ordinal>7</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>342</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Total Fertility Rate</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Total Fertility Rate]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Total Fertility Rate</remote-alias>
+              <ordinal>8</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>335</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>Employed FLFPR</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[Employed FLFPR]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>Employed FLFPR</remote-alias>
+              <ordinal>9</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>384</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>GDP per Capita (sqrt)</remote-name>
+              <remote-type>5</remote-type>
+              <local-name>[GDP per Capita (sqrt)]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>GDP per Capita (sqrt)</remote-alias>
+              <ordinal>10</ordinal>
+              <family>Sheet1</family>
+              <local-type>real</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>384</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[Sheet1_BBEC63A771374765ABC88DC83E2510CA]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+      <object-graph>
+        <objects>
+          <object caption='Sheet1' id='Sheet1_BBEC63A771374765ABC88DC83E2510CA'>
+            <properties context=''>
+              <relation connection='excel-direct.1gi2wfe1f1489r114v5571wg78n4' name='Sheet1' table='[Sheet1$]' type='table'>
+                <columns gridOrigin='A1:K386:no:A1:K386:0' header='yes' outcome='6'>
+                  <column datatype='string' name='Country Name' ordinal='0' />
+                  <column datatype='string' name='Country Code' ordinal='1' />
+                  <column datatype='integer' name='Year' ordinal='2' />
+                  <column datatype='real' name='Female Labor Force Participation Rate' ordinal='3' />
+                  <column datatype='real' name='Female Unemployment Rate' ordinal='4' />
+                  <column datatype='real' name='GDP Growth Rate' ordinal='5' />
+                  <column datatype='real' name='GDP per Capita' ordinal='6' />
+                  <column datatype='real' name='Girls’ Tertiary Enrollment' ordinal='7' />
+                  <column datatype='real' name='Total Fertility Rate' ordinal='8' />
+                  <column datatype='real' name='Employed FLFPR' ordinal='9' />
+                  <column datatype='real' name='GDP per Capita (sqrt)' ordinal='10' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Lebanon Fertility Trend'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Lebanon Fertility Trend, 1990-2024</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Total Fertility Rate]' role='measure' type='quantitative' />
+            <column-instance column='[Country Code]' derivation='None' name='[none:Country Code:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Total Fertility Rate]' derivation='Avg' name='[avg:Total Fertility Rate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]'>
+            <groupfilter function='member' level='[none:Country Code:nk]' member='&quot;LBN&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Total Fertility Rate:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</cols>
+      </table>
+      <simple-id uuid='{AF27C341-7071-458F-A6F3-370225459C05}' />
+    </worksheet>
+    <worksheet name='Lebanon FLFPR Trend'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Lebanon Female Labor Force Participation Trend, 1990-2024</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Female Labor Force Participation Rate]' role='measure' type='quantitative' />
+            <column-instance column='[Country Code]' derivation='None' name='[none:Country Code:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]'>
+            <groupfilter function='member' level='[none:Country Code:nk]' member='&quot;LBN&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</cols>
+      </table>
+      <simple-id uuid='{B0ACC716-EA25-4DAA-B774-4F558F4250F3}' />
+    </worksheet>
+    <worksheet name='Lebanon Education Trend'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Lebanon Girls' Tertiary Enrollment Trend, 1990-2024</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Girls’ Tertiary Enrollment]' role='measure' type='quantitative' />
+            <column-instance column='[Country Code]' derivation='None' name='[none:Country Code:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Girls’ Tertiary Enrollment]' derivation='Avg' name='[avg:Girls’ Tertiary Enrollment:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]'>
+            <groupfilter function='member' level='[none:Country Code:nk]' member='&quot;LBN&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Line' />
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Girls’ Tertiary Enrollment:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</cols>
+      </table>
+      <simple-id uuid='{53FA54D3-267A-4A5B-9B9F-C44472F1A26D}' />
+    </worksheet>
+    <worksheet name='TFR vs FLFPR Bubble'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Total Fertility Rate vs Female Labor Force Participation</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Name]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column caption='Arab Group' datatype='string' name='[Calculation_Arab_Group]' role='dimension' type='nominal' />
+            <column aggregation='Avg' datatype='real' name='[Total Fertility Rate]' role='measure' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Female Labor Force Participation Rate]' role='measure' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[GDP per Capita (sqrt)]' role='measure' type='quantitative' />
+            <column-instance column='[Country Name]' derivation='None' name='[none:Country Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_Arab_Group]' derivation='None' name='[none:Calculation_Arab_Group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Total Fertility Rate]' derivation='Avg' name='[avg:Total Fertility Rate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[GDP per Capita (sqrt)]' derivation='Avg' name='[avg:GDP per Capita (sqrt):qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
+            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' />
+              <color column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]' />
+              <size column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:GDP per Capita (sqrt):qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Total Fertility Rate:qk]</cols>
+      </table>
+      <simple-id uuid='{5B670418-D68C-4F4E-8224-A8DB7F7BAB83}' />
+    </worksheet>
+    <worksheet name='Education vs FLFPR Paradox'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Girls' Tertiary Enrollment vs Female Labor Force Participation</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Name]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column caption='Lebanon Highlight' datatype='string' name='[Calculation_Lebanon_Highlight]' role='dimension' type='nominal' />
+            <column aggregation='Avg' datatype='real' name='[Girls’ Tertiary Enrollment]' role='measure' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Female Labor Force Participation Rate]' role='measure' type='quantitative' />
+            <column-instance column='[Country Name]' derivation='None' name='[none:Country Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_Lebanon_Highlight]' derivation='None' name='[none:Calculation_Lebanon_Highlight:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Girls’ Tertiary Enrollment]' derivation='Avg' name='[avg:Girls’ Tertiary Enrollment:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
+            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Lebanon_Highlight:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Circle' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' />
+              <color column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Lebanon_Highlight:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Girls’ Tertiary Enrollment:qk]</cols>
+      </table>
+      <simple-id uuid='{0392B4B6-681C-47DB-AB68-934D7F527221}' />
+    </worksheet>
+    <worksheet name='Lebanon Employment Decomposition'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Lebanon Employment Component of Female Labor Force Participation</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Code]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Employed FLFPR]' role='measure' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[Calculation_Unemployed_FLFPR_Component]' role='measure' type='quantitative' />
+            <column-instance column='[Country Code]' derivation='None' name='[none:Country Code:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Employed FLFPR]' derivation='Avg' name='[avg:Employed FLFPR:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_Unemployed_FLFPR_Component]' derivation='Avg' name='[avg:Calculation_Unemployed_FLFPR_Component:qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]'>
+            <groupfilter function='member' level='[none:Country Code:nk]' member='&quot;LBN&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Code:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Area' />
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Employed FLFPR:qk]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</cols>
+      </table>
+      <simple-id uuid='{A338211F-2F37-4F5D-9346-5469474B3EBF}' />
+    </worksheet>
+    <worksheet name='Country Indicator Map'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>Country Comparison Map, 2024</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (merged_panel_wide)' name='federated.0tx5qf61r3pddd1emh1cn1aqc4t6' />
+          </datasources>
+          <mapsources>
+            <mapsource name='Tableau' />
+          </mapsources>
+          <datasource-dependencies datasource='federated.0tx5qf61r3pddd1emh1cn1aqc4t6'>
+            <column datatype='string' name='[Country Name]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column datatype='integer' name='[Year]' role='dimension' type='quantitative' />
+            <column caption='Arab Group' datatype='string' name='[Calculation_Arab_Group]' role='dimension' type='nominal' />
+            <column aggregation='Avg' datatype='real' name='[Female Labor Force Participation Rate]' role='measure' type='quantitative' />
+            <column aggregation='Avg' datatype='real' name='[GDP per Capita (sqrt)]' role='measure' type='quantitative' />
+            <column-instance column='[Country Name]' derivation='None' name='[none:Country Name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Year]' derivation='None' name='[none:Year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_Arab_Group]' derivation='None' name='[none:Calculation_Arab_Group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[GDP per Capita (sqrt)]' derivation='Avg' name='[avg:GDP per Capita (sqrt):qk]' pivot='key' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
+            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]</column>
+            <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <encodings>
+              <lod column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' />
+              <color column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]' />
+              <size column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:GDP per Capita (sqrt):qk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[Latitude (generated)]</rows>
+        <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[Longitude (generated)]</cols>
+      </table>
+      <simple-id uuid='{EF50F286-BFBE-4B2F-8F0D-E3485EA4484B}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Lebanon Fertility Trend'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{06460509-3EBC-42F7-84EE-96376CBCD364}' />
+    </window>
+    <window class='worksheet' name='Lebanon FLFPR Trend'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{15070986-5231-4F59-9231-22D49D221E8B}' />
+    </window>
+    <window class='worksheet' name='Lebanon Education Trend'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{88F5F1DC-072E-477A-9FD1-2D2044786250}' />
+    </window>
+    <window class='worksheet' name='TFR vs FLFPR Bubble'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{3ECAFAE4-6F2C-43DB-8A40-AE07639B8D84}' />
+    </window>
+    <window class='worksheet' name='Education vs FLFPR Paradox'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A9D015A6-9365-4FFD-A7F6-1FC9997040C8}' />
+    </window>
+    <window class='worksheet' name='Lebanon Employment Decomposition'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{78363EFE-00C5-47D6-8D6D-629EA7A7ED6A}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Country Indicator Map'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{1C954EF8-098F-4119-A31D-60CB3AEC9A6D}' />
+    </window>
+  </windows>
+</workbook>
