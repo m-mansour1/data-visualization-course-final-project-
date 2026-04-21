@@ -1,0 +1,428 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{amsmath}
+
+\usepackage{parskip}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{abstract}
+\usepackage{enumitem}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small DSC614 -- Data Visualization}
+\lhead{\small Mansour \& Karam}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{}{0em}{}
+
+% Spacing
+\setstretch{1.4}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+% Caption formatting
+\captionsetup{font=small, labelfont=bf, margin=1cm}
+
+% Figure placeholder macro
+\newcommand{\figplaceholder}[2]{%
+  \begin{center}
+    \fbox{\parbox{0.88\textwidth}{\centering\vspace{0.6cm}
+      \textit{\textbf{[Tableau Visualization: #1]}}\\[4pt]
+      \small #2
+      \vspace{0.6cm}}}
+  \end{center}
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+}
+
+% ─────────────────────────────────────────────────────────
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Large\bfseries Fertility, Female Labor Participation, and Economic Conditions:\\[6pt]
+  A Comparative Analysis of Lebanon and Selected Countries\par}
+  \vspace{1.5cm}
+  {\normalsize
+  Mira Mansour \quad -- \quad Fida Karam\\[4pt]
+  DSC614 -- Data Visualization\\[4pt]
+  \today
+  }
+  \vspace{1.5cm}
+  \rule{0.6\textwidth}{0.4pt}
+
+  \vspace{1cm}
+  {\small\itshape
+  Data source: World Bank Open Data -- World Development Indicators (WDI), 1990--2024.\\
+  Visualizations produced in Tableau Public using Python-preprocessed panel data.
+  }
+\end{titlepage}
+
+% ─────────────────────────────────────────────────────────
+\newpage
+\begin{abstract}
+\noindent
+This report examines the relationship between female labor force participation (FLFPR), fertility, educational attainment, and economic conditions in Lebanon relative to ten comparator countries spanning the Arab world and similarly-developed non-Arab economies. Using World Bank World Development Indicators covering 1990 to 2024, five inter-related sub-questions are addressed through a suite of Tableau visualizations. The analysis confirms that Lebanon exhibits the \textit{MENA paradox} in near-textbook form: three decades of declining fertility and rising female tertiary enrollment have not translated into commensurate labor market entry. Lebanon's FLFPR stood at 18.0\% in 1990 and, after a modest climb to 29.3\% by 2019, collapsed to 22.2\% in the wake of the financial crisis -- a trajectory fundamentally different from every non-Arab comparator and even from most Arab peers. The 2019 economic shock amplified rather than created Lebanon's structural participation deficit, and the fertility-participation link that holds weakly across comparators is essentially absent within the Lebanese context. These findings point toward structural and cultural determinants -- rather than demographic ones -- as the primary barriers to female employment in Lebanon.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% ─────────────────────────────────────────────────────────
+\section{Introduction}
+\label{sec:intro}
+
+The relationship between female labor force participation and fertility sits at the intersection of demographic transition theory and labor economics. Across most of the world, as women gain education and bear fewer children, their workforce participation rises -- the so-called ``quantity--quality'' substitution model of household time allocation predicts exactly this outcome. Yet in the Middle East and North Africa (MENA), this relationship breaks down in a distinctive and persistent way. Women in the region are increasingly educated and having fewer children, yet their entry into paid employment has stagnated or, in some countries, declined. Researchers have termed this the \textit{MENA paradox} \citep{assaad2020}.
+
+Lebanon represents one of the most analytically striking instantiations of this paradox. Prior to 2019, Lebanon occupied a relatively comfortable economic position for the region, with GDP per capita approaching \$9{,}000 -- comparable in income terms to Turkey and above most of its Arab neighbors. Lebanese women were enrolling in tertiary education at high rates, and the total fertility rate had fallen from 3.27 births per woman in 1990 to below 2.4 by the mid-2010s. Yet FLFPR lingered around 20--26\%, far below comparator economies at similar development levels.
+
+Then came the 2019 financial collapse. The Lebanese pound lost over 90\% of its value, the banking sector froze depositors' savings, and GDP per capita plummeted from \$8{,}906 in 2019 to \$3{,}478 by 2024 -- a contraction of 61.0\%, among the most severe in any non-wartime peacetime economy in modern history. Female unemployment rose from 14.3\% in 2019 to 16.2\% in 2020, and overall FLFPR fell sharply by 7.1 percentage points between 2019 and 2024. This layered crisis -- a pre-existing structural participation puzzle compounded by an acute economic shock -- makes Lebanon an exceptionally valuable case for studying gender labor market dynamics under stress.
+
+This report addresses five sub-questions derived from the project proposal, organizing the analysis across the five visualization screens developed in Tableau. Section~\ref{sec:trends} examines the long-run co-evolution of FLFPR, fertility, and education in Lebanon and comparators. Section~\ref{sec:paradox} tests the education-participation disconnect directly. Section~\ref{sec:gdp} explores how GDP per capita mediates the participation relationship. Section~\ref{sec:decomp} decomposes Lebanon's FLFPR into employed and unemployment-displaced components around the 2019 crisis. Section~\ref{sec:crosscountry} positions Lebanon against all eleven study countries. Section~\ref{sec:synthesis} synthesizes findings against the overarching research question.
+
+% ─────────────────────────────────────────────────────────
+\section{Data and Methodology}
+\label{sec:data}
+
+All data are drawn from the World Bank's World Development Indicators (WDI), accessed via \url{data.worldbank.org}, covering annual observations from 1990 to 2024. Six core indicators are used:
+
+\begin{itemize}[noitemsep]
+  \item \textbf{Female Labor Force Participation Rate} (FLFPR, \texttt{SL.TLF.CACT.FE.ZS}) -- the share of the female population aged 15+ that is either employed or actively seeking employment.
+  \item \textbf{Total Fertility Rate} (TFR, \texttt{SP.DYN.TFRT.IN}) -- average births per woman over her reproductive lifetime.
+  \item \textbf{Female Unemployment Rate} (FUR, \texttt{SL.UEM.TOTL.FE.ZS}) -- the share of the female labor force that is unemployed.
+  \item \textbf{Girls' Tertiary Enrollment Rate} (\texttt{SE.TER.ENRR.FE}) -- gross female enrollment in tertiary education as a share of the relevant age group.
+  \item \textbf{GDP per Capita} (\texttt{NY.GDP.PCAP.CD}) -- current USD, used as an indicator of economic development level.
+  \item \textbf{Employed FLFPR} (derived) -- calculated as FLFPR $\times$ $(1 - \text{FUR}/100)$, representing the share of the female population that is both participating in and successfully employed within the labor force.
+\end{itemize}
+
+The eleven study countries comprise five Arab comparators -- Jordan, Egypt, Tunisia, Morocco, Algeria -- and five non-Arab comparators -- Turkey, Iran, Georgia, Albania, Armenia. The non-Arab group was selected because their GDP per capita immediately before Lebanon's 2019 collapse placed them in a broadly similar development range (\$4{,}000--\$9{,}000), enabling a test of whether low female participation is MENA-specific or a general characteristic of this income tier.
+
+Data preprocessing was performed in Python using Pandas and NumPy. Steps included merging country-year files into a single panel, handling missing values via year restriction, standardizing variable names, and computing the Employed FLFPR derived variable. GDP per capita was square-root transformed for bubble-size encoding in scatter visualizations. All visualizations were constructed in Tableau Public (version 2024.x).
+
+% ─────────────────────────────────────────────────────────
+\section{Sub-Question 1: Fertility and FLFPR Trends in Lebanon and Comparators}
+\label{sec:trends}
+
+\textit{How have fertility and female labor force participation evolved in Lebanon versus comparators?}
+
+\subsection{Lebanon's Trend: The Paradox in Motion}
+
+The Lebanon Paradox Overview chart (Figure~\ref{fig:paradox_overview}) presents a dual-axis line chart of Lebanon's TFR, FLFPR, and Girls' Tertiary Enrollment from 1990 to 2024. The chart is the clearest single-frame illustration of the MENA paradox as experienced by Lebanon. Three trajectories are visible: fertility falling from 3.27 in 1990 to 2.23 in 2024; educational enrollment rising substantially over the same period; and FLFPR climbing only modestly from 18.0\% in 1990, reaching a peak of 29.3\% in 2019, before collapsing to 22.2\% by 2024.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{Lebanon Paradox Overview}{%
+    Dual-axis line chart for Lebanon (1990--2024). Left axis: FLFPR (\%) and Girls' Tertiary Enrollment (\%). Right axis: Total Fertility Rate. Lebanon's TFR declines from 3.27 (1990) to 2.23 (2024). FLFPR climbs from 18.0\% to a peak of 29.3\% in 2019 before retreating to 22.2\% by 2024 following the financial collapse. Girls' tertiary enrollment rises sharply across the same period. Vertical reference lines mark the 2019 financial collapse and 2020 COVID-19 onset.%
+  }
+  \caption{Lebanon Paradox Overview: co-evolution of FLFPR, TFR, and girls' tertiary enrollment, 1990--2024. Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:paradox_overview}
+\end{figure}
+
+Three distinct phases are visible in Lebanon's participation trajectory. In the \textbf{reconstruction phase} (1990--2005), FLFPR crept upward by approximately 2.5 percentage points as post-civil-war economic recovery created limited formal sector openings. In the \textbf{growth phase} (2005--2019), driven by an expanding services sector and improved macroeconomic conditions (GDP per capita reaching \$9{,}175 in 2018), FLFPR rose more steeply, gaining 8.8 percentage points in fourteen years. In the \textbf{collapse phase} (2019--2024), the financial crisis reversed virtually all of the growth-phase gains; FLFPR fell 7.1 percentage points.
+
+Crucially, all three phases unfolded against a backdrop of continuously falling fertility and rising education. The TFR fell from 3.27 to 2.29 between 1990 and 2005, and continued to decline to 2.23 by 2024. This 1.04-birth decline is substantial by regional standards. If the standard demographic model held -- lower fertility freeing time and human capital for market work -- FLFPR should have risen far more steeply than it did. The gap between predicted and actual participation defines the paradox.
+
+\subsection{Comparator Trends}
+
+Table~\ref{tab:flfpr_trends} summarizes FLFPR and TFR for all eleven countries at key benchmark years.
+
+\begin{table}[H]
+\centering
+\caption{Female Labor Force Participation Rate (\%) and Total Fertility Rate at benchmark years. Source: World Bank WDI.}
+\label{tab:flfpr_trends}
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multirow{2}{*}{\textbf{Country}} & \multicolumn{4}{c}{\textbf{FLFPR (\%)}} & \multicolumn{4}{c}{\textbf{TFR}} \\
+\cmidrule(lr){2-5}\cmidrule(lr){6-9}
+ & 1990 & 2000 & 2015 & 2024 & 1990 & 2000 & 2015 & 2024 \\
+\midrule
+\textbf{Lebanon}  & 18.0 & 19.7 & 26.1 & 22.2 & 3.27 & 2.60 & 2.38 & 2.23 \\
+\midrule
+Jordan   & 11.2 & 11.8 & 13.6 & 16.0 & 5.54 & 3.86 & 3.14 & 2.60 \\
+Egypt    & 22.2 & 20.4 & 22.8 & 18.5 & 4.51 & 3.50 & 3.50 & 2.73 \\
+Tunisia  & 22.2 & 23.7 & 26.1 & 26.6 & 3.44 & 2.02 & 2.31 & 1.82 \\
+Morocco  & 22.8 & 24.9 & 24.4 & 19.8 & 4.06 & 2.77 & 2.41 & 2.21 \\
+Algeria  & 11.7 & 12.0 & 15.3 & 14.3 & 4.51 & 2.59 & 3.09 & 2.72 \\
+\midrule
+Turkey   & 33.9 & 26.5 & 31.4 & 36.8 & 3.11 & 2.49 & 2.16 & 1.48 \\
+Iran     &  9.6 & 13.7 & 14.4 & 14.1 & 4.93 & 2.00 & 2.02 & 1.68 \\
+Georgia  & 70.3 & 68.2 & 58.7 & 56.7 & 2.31 & 1.61 & 2.21 & 1.80 \\
+Albania  & 53.5 & 50.8 & 47.1 & 58.2 & 3.01 & 2.22 & 1.63 & 1.34 \\
+Armenia  & 57.6 & 54.5 & 53.8 & 51.6 & 2.71 & 1.30 & 1.60 & 1.70 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The divergence between the Arab and non-Arab groups is stark. The five non-Arab comparators averaged 43.5\% FLFPR in 2024, compared to 19.0\% for the five Arab comparators (excluding Lebanon). This 24.5-percentage-point gap exists despite the non-Arab group having generally lower fertility rates (average TFR of 1.60 versus 2.42), which would predict \textit{higher} non-Arab participation under the standard model -- and indeed, that is what the data show. Lebanon at 22.2\% sits above the Arab average but is separated from Georgia (56.7\%), Albania (58.2\%), and Armenia (51.6\%) by a chasm of more than 30 percentage points.
+
+Within the Arab group, the variation is informative. Tunisia shows the most positive trajectory: rising FLFPR (22.2\% to 26.6\%) paired with sharply falling fertility (3.44 to 1.82), the closest to the standard model prediction among Arab peers. Egypt and Morocco have both seen FLFPR \textit{decline} since 2015 despite falling fertility, a pattern consistent with deteriorating formal sector conditions rather than demographic drivers. Jordan and Algeria remain persistently low, constrained by oil-rentier labor market structures and conservative employment norms.
+
+% ─────────────────────────────────────────────────────────
+\section{Sub-Question 2: The Education--Participation Disconnect}
+\label{sec:paradox}
+
+\textit{Does the education-participation disconnect hold?}
+
+\subsection{The Paradox Scatter}
+
+The Education vs.\ FLFPR Paradox scatter (Figure~\ref{fig:paradox_scatter}) directly visualizes the central analytical claim of this project. Each data point represents a country-year observation; the x-axis plots girls' tertiary enrollment rate and the y-axis plots FLFPR, with Lebanon highlighted throughout in a distinct color.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{Girls' Tertiary Enrollment vs.\ FLFPR (Paradox Scatter)}{%
+    Scatter plot with girls' tertiary enrollment (\%) on the x-axis and FLFPR (\%) on the y-axis. Each point is a country-year observation. Lebanon is highlighted in orange at approximately 38--40\% enrollment and 20--22\% FLFPR. Non-Arab comparators cluster in the upper portion of the chart. Arab comparators, including Lebanon, cluster at low FLFPR despite varying enrollment levels. Color encodes the Lebanon Highlight field (Lebanon vs.\ all other countries).%
+  }
+  \caption{Girls' Tertiary Enrollment vs.\ FLFPR. Lebanon highlighted at $\sim$38--40\% enrollment and $\sim$20--22\% FLFPR. Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:paradox_scatter}
+\end{figure}
+
+In a world where the education-to-employment pipeline functions normally, the scatter would show a positive relationship: higher enrollment associated with higher participation. Among the non-Arab comparators, a weak positive relationship is discernible: Georgia, Albania, and Armenia maintain high FLFPR across enrollment values, while Turkey's participation has risen as its enrollment expanded. But the Arab group -- and Lebanon in particular -- sits in a zone that should not exist under standard theory: moderate-to-high tertiary enrollment combined with very low participation.
+
+The practical interpretation is important. Lebanon's women are earning degrees at rates broadly comparable to European economies, yet roughly four in five working-age Lebanese women are outside the formal labor force. The education investment is not converting into employment at the rate the international evidence would predict. This gap represents both a social and an economic inefficiency: human capital that is accumulated but not deployed productively.
+
+\subsection{Structural Explanations}
+
+The literature offers several non-fertility explanations for why education and participation decouple in the MENA context \citep{assaad2020, majbouri2020}. First, reservation wages are high: educated women in Lebanon, Jordan, and Egypt typically hold out for formal sector, white-collar positions commensurate with their qualifications, rather than accepting informal or lower-skilled work. Second, high female unemployment (Lebanon's stands at 14.5\% in 2024) means that even willing participants face structural barriers to employment. Third, social norms and household bargaining dynamics in the Arab world continue to impose higher implicit costs on female labor force entry, including expectations around domestic duties and geographic mobility constraints.
+
+The paradox scatter confirms that the education-participation disconnect is not an artifact of Lebanon's idiosyncratic experience: it characterizes the Arab group as a whole, with Lebanon sitting near the centre of a low-participation Arab cluster. This is precisely the pattern \citet{assaad2020} identify as the defining structural feature of MENA female labor markets.
+
+% ─────────────────────────────────────────────────────────
+\section{Sub-Question 3: GDP per Capita and Female Participation}
+\label{sec:gdp}
+
+\textit{How does GDP per capita shape the relationship?}
+
+\subsection{The Bubble Scatter}
+
+The TFR vs.\ FLFPR bubble chart (Figure~\ref{fig:bubble}) encodes three dimensions simultaneously: TFR on the x-axis, FLFPR on the y-axis, and GDP per capita as the size of each bubble. Countries are colored by group (Arab versus non-Arab). The chart allows the question of economic development as a moderating variable to be addressed directly.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{TFR vs.\ FLFPR Bubble Chart (GDP per Capita as Bubble Size)}{%
+    Bubble scatter plot. X-axis: Average Total Fertility Rate. Y-axis: Average Female Labor Force Participation Rate. Bubble size encodes GDP per capita (square-root transformed). Color encodes country group (Arab vs.\ non-Arab). Lebanon highlighted separately. Countries visible: all eleven study nations. Filter set to a representative year or year range.%
+  }
+  \caption{TFR vs.\ FLFPR with GDP per capita as bubble size. Arab countries (including Lebanon) cluster at low FLFPR regardless of TFR level. Non-Arab comparators show higher FLFPR despite comparable or lower GDP per capita. Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:bubble}
+\end{figure}
+
+Several findings emerge from the bubble chart. First, the Arab cluster occupies a distinctive zone: low FLFPR (roughly 14--27\%) across a range of TFR values from 1.82 (Tunisia) to 2.73 (Egypt), with GDP per capita bubble sizes that are generally moderate. Lebanon sits within this Arab cluster, its bubble reflecting the relatively high GDP per capita that made it the region's most economically developed Arab state prior to 2019.
+
+Second, the non-Arab comparators demonstrate that GDP per capita in the \$4{,}000--\$10{,}000 range is not deterministically associated with low female participation. Albania (\$11{,}378 in 2024), Armenia (\$8{,}556), and Georgia (\$9{,}241) all show FLFPR above 50\% -- more than double Lebanon's current rate -- despite not being dramatically wealthier. Turkey, with a much larger bubble (GDP per capita \$15{,}893 in 2024), shows 36.8\% FLFPR. Iran, with a relatively small bubble (\$5{,}190), shows only 14.1\% FLFPR -- one of the lowest in the study, suggesting that within the MENA group, higher income does not guarantee higher female participation either.
+
+Third, the Lebanese bubble is notable for its \textit{trajectory}: in 2019 it was the largest Arab bubble by GDP, yet its FLFPR was not the highest among Arab states -- Tunisia's participation rate (28.3\%) equaled Lebanon's despite a much smaller bubble. After the collapse, Lebanon's bubble has shrunk dramatically (to \$3{,}478 in 2024), confirming that its prior economic advantage has been eliminated.
+
+\subsection{Interpreting the GDP Relationship}
+
+These observations suggest that GDP per capita is a necessary but not sufficient condition for high female labor force participation in this region. The non-Arab group demonstrates that countries at Lebanon's pre-crisis income level can sustain participation rates three times Lebanon's. What differs is not primarily income -- it is the cultural, institutional, and labor market structural context. The MENA group's low participation is remarkably robust to income variation within the \$3{,}000--\$10{,}000 GDP range, which provides strong evidence that the MENA paradox is structural rather than a temporary feature of early development that will self-correct with economic growth.
+
+% ─────────────────────────────────────────────────────────
+\section{Sub-Question 4: Female Unemployment and the 2019 Collapse}
+\label{sec:decomp}
+
+\textit{Does female unemployment account for participation shortfalls, especially post-2019?}
+
+\subsection{The Employment Decomposition}
+
+The Lebanon Employment Decomposition chart (Figure~\ref{fig:decomp}) decomposes Lebanon's aggregate FLFPR into two components stacked over time: the \textit{Employed FLFPR} (the share of the total female population that is both participating and employed) and the \textit{Unemployed FLFPR component} (the share of the total female population that is participating but unemployed). The stacked area chart makes explicit what headline FLFPR figures obscure: even when participation rises, a growing fraction of those participants are failing to find work.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{Lebanon Employment Decomposition (Stacked Area Chart)}{%
+    Stacked area chart for Lebanon, 1990--2024. Bottom stack (teal): Employed FLFPR -- the share of the total female population that is both in the labor force and employed. Top stack (coral/orange): Unemployed FLFPR component -- the share of the total female population that is in the labor force but unemployed. Vertical reference lines at 2019 (Financial Collapse) and 2020 (COVID-19). The total height of the stacked area at each year equals the aggregate FLFPR.%
+  }
+  \caption{Lebanon FLFPR decomposed into Employed and Unemployed components, 1990--2024. Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:decomp}
+\end{figure}
+
+Table~\ref{tab:decomp} presents the decomposition in numeric form at key years.
+
+\begin{table}[H]
+\centering
+\caption{Lebanon FLFPR decomposition: Employed vs.\ Unemployed components (\% of total female population). Derived as FLFPR $\times$ (1$-$FUR/100) and FLFPR $\times$ FUR/100. Source: World Bank WDI.}
+\label{tab:decomp}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Year} & \textbf{FLFPR} & \textbf{FUR} & \textbf{Employed} & \textbf{Unemployed} & \textbf{Unemp.\ share} \\
+\midrule
+1990 & 18.0 & 10.6 & 16.1 & 1.9 & 10.6\% \\
+2000 & 19.7 & 10.4 & 17.6 & 2.1 & 10.4\% \\
+2010 & 22.8 & 10.7 & 20.4 & 2.4 & 10.7\% \\
+2015 & 26.1 & 12.8 & 22.8 & 3.4 & 12.8\% \\
+2019 & 29.3 & 14.3 & 25.1 & 4.2 & 14.3\% \\
+2020 & 25.9 & 16.2 & 21.7 & 4.2 & 16.2\% \\
+2022 & 22.3 & 14.6 & 19.1 & 3.3 & 14.6\% \\
+2024 & 22.2 & 14.5 & 19.0 & 3.2 & 14.5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Pre-Crisis Accumulation of Unemployment Risk}
+
+A critical insight from the decomposition is that Lebanon's female unemployment problem predates 2019. In 1990, unemployment accounted for 10.6\% of the participating female workforce -- approximately 1.9 percentage points of the 18.0\% aggregate FLFPR. By 2015, that share had grown to 12.8\%, and by 2019, immediately before the collapse, it stood at 14.3\%, absorbing 4.2 percentage points of the 29.3\% FLFPR. The unemployed component was \textit{growing faster} than the employed component throughout the 2005--2019 growth phase, meaning that Lebanon's rising FLFPR was partly a mirage: more women were entering the labor force but finding it increasingly difficult to secure employment.
+
+\subsection{The 2019--2020 Shock}
+
+The financial collapse's signature in the decomposition is a sharp vertical drop in the total stacked area between 2019 and 2020, accompanied by a \textit{relative increase} in the unemployed component's share. Employed FLFPR fell from 25.1\% to 21.7\% in a single year -- a 3.4 percentage-point contraction representing women who exited employment. The unemployed component initially held at 4.2 percentage points in absolute terms (as some newly unemployed women remained in the labor force seeking work) before declining as \textit{discouraged workers} exited the labor force entirely. By 2024, Employed FLFPR stood at 19.0\% -- just 2.9 points above the 1990 level, almost entirely reversing three decades of employment-side progress.
+
+\subsection{Unemployment as a Participation Barrier}
+
+The decomposition provides a partial but important answer to the sub-question. Female unemployment in Lebanon accounts for a structurally elevated share of participation -- 14.5\% in 2024 -- which is meaningfully higher than Georgia (10.2\%), Albania (11.0\%), and Armenia (13.2\%), and broadly comparable to Turkey (11.9\%) and Iran (15.1\%). However, unemployment alone does not explain Lebanon's low \textit{aggregate} FLFPR: Jordan's female unemployment rate (23.1\%) far exceeds Lebanon's, yet Jordan's participation rate (16.0\%) is also low. The participation shortfall in Lebanon is primarily driven by the large share of women who are \textit{not} in the labor force at all (approximately 77.8\% of working-age women as of 2024), not by those who are in the labor force and unable to find work. Unemployment amplifies the problem but does not cause it.
+
+% ─────────────────────────────────────────────────────────
+\section{Sub-Question 5: Lebanon's Position Among Arab and Non-Arab Peers}
+\label{sec:crosscountry}
+
+\textit{Where does Lebanon fall relative to Arab and non-Arab peers?}
+
+\subsection{The Cross-Country Line Chart}
+
+Figure~\ref{fig:crosscountry} presents the Cross-Country FLFPR Trends chart: a single line chart plotting FLFPR from 1990 to 2024 for all eleven countries, with Lebanon highlighted in orange against muted gray lines for all comparators. This visualization directly answers the question of Lebanon's relative position.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{Cross-Country Female Labor Force Participation Rate Trends (1990--2024)}{%
+    Line chart with Year (1990--2024) on the x-axis and FLFPR (\%) on the y-axis. One line per country. Lebanon is rendered in bold orange; all other countries are rendered in light gray. Country labels appear at the end of each line. Lebanon's line runs along the bottom portion of the chart (18--29\% range), clearly below Turkey, Georgia, Albania, and Armenia, and broadly similar to the other Arab comparators. The chart confirms Lebanon's persistent low-participation status and the dramatic post-2019 reversal.%
+  }
+  \caption{Cross-country FLFPR trends, 1990--2024. Lebanon highlighted in orange. Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:crosscountry}
+\end{figure}
+
+\subsection{The Country Comparison Heatmap}
+
+Figure~\ref{fig:heatmap} complements the trend chart with a snapshot comparison. The Country Comparison Heatmap presents all eleven countries (rows) against five indicators (columns) -- FLFPR, TFR, Female Unemployment Rate, Girls' Tertiary Enrollment, and GDP per Capita -- with separate color scales applied to each indicator column so that high and low values are identifiable regardless of measurement unit differences.
+
+\begin{figure}[H]
+  \centering
+  \figplaceholder{Country Comparison Heatmap}{%
+    Highlight table (heat map) with Country Name on rows and five indicators on columns: Female Labor Force Participation Rate, Total Fertility Rate, Female Unemployment Rate, Girls' Tertiary Enrollment, and GDP per Capita. Separate color gradient applied per column. Rows: Albania, Algeria, Armenia, Egypt, Georgia, Iran, Jordan, Lebanon, Morocco, Tunisia, Turkey. Lebanon's row shows a distinctive pattern: low FLFPR, moderate TFR, moderate-to-high FUR, and a GDP per capita that has collapsed to near the bottom of the group.%
+  }
+  \caption{Country Comparison Heatmap across five indicators (separate color scales per indicator). Source: World Bank WDI; Tableau visualization by authors.}
+  \label{fig:heatmap}
+\end{figure}
+
+\subsection{Lebanon's Position: A Multi-Indicator Assessment}
+
+Reading across Lebanon's row in the heatmap and tracking its orange line in Figure~\ref{fig:crosscountry} reveals a consistent pattern: Lebanon is a low-participation outlier within an already low-participation Arab group, but its outlier status is not as extreme relative to Arab peers as it is relative to non-Arab peers.
+
+On FLFPR, Lebanon ranks sixth among the eleven countries (22.2\% in 2024), above Iran (14.1\%), Algeria (14.3\%), Jordan (16.0\%), Egypt (18.5\%), and Morocco (19.8\%), but below Tunisia (26.6\%). Within the Arab group, Lebanon is slightly above average -- a fact that may be surprising given its relatively high educational attainment and pre-crisis income. Against the non-Arab group, Lebanon's participation rate is less than half of Georgia's (56.7\%), Albania's (58.2\%), and Armenia's (51.6\%).
+
+On TFR, Lebanon at 2.23 is the median Arab country, below Jordan (2.60), Egypt (2.73), and Algeria (2.72), but above Tunisia (1.82) and Morocco (2.21). Crucially, Lebanon's TFR is now \textit{higher} than those of three non-Arab comparators (Turkey at 1.48, Albania at 1.34, Armenia at 1.70), yet Lebanon's FLFPR is far lower -- directly illustrating that fertility level alone cannot explain the participation gap.
+
+On female unemployment, the heatmap shows Lebanon (14.5\%) in a moderate position -- lower than Jordan (23.1\%), Algeria (21.1\%), Tunisia (20.7\%), and Egypt (15.3\%), but higher than Morocco (10.8\%), Turkey (11.9\%), Albania (11.0\%), and Georgia (10.2\%). This suggests that Lebanon's female labor market is not unusually dysfunctional in terms of unemployment \textit{among participants} -- the problem lies primarily with low participation itself.
+
+The GDP per capita column in the heatmap is particularly telling. Lebanon, which had the highest or second-highest GDP per capita among Arab comparators as recently as 2019, now sits near the bottom of the full eleven-country sample at \$3{,}478. This rapid reversal means that Lebanon's income-based development advantage -- which could previously have been used to argue that rising prosperity would eventually pull female participation up -- has been erased. Lebanon now faces the dual challenge of rebuilding economic foundations while simultaneously addressing the structural determinants of female exclusion from the labor market.
+
+% ─────────────────────────────────────────────────────────
+\section{Main Research Question: Synthesis}
+\label{sec:synthesis}
+
+\textit{What is the relationship between female labor force participation and fertility in Lebanon, and how does it compare to similar countries when economic conditions are accounted for?}
+
+The evidence assembled across the five sub-questions converges on a clear and analytically robust answer: in Lebanon, as across the Arab comparator group, the relationship between fertility and female labor force participation is \textit{weak, inconsistent, and structurally overridden} by labor market and social determinants that operate independently of demographic change.
+
+\subsection{The Fertility--Participation Link: Weak and Conditional}
+
+Standard demographic theory predicts that falling fertility should release women's time and human capital for market work, raising participation. Within the Arab group, there is some evidence for this: Tunisia, with the lowest Arab TFR (1.82) and the highest Arab FLFPR (26.6\%), is closest to the predicted pattern. But the relationship disintegrates across the full sample. Iran has a TFR of 1.68 -- below Tunisia, below Lebanon, and below Morocco -- yet its FLFPR (14.1\%) is the lowest in the study. Albania has the lowest TFR of all eleven countries (1.34) and the highest FLFPR (58.2\%), which does support the model, but this association is driven by cultural and institutional factors specific to Southeast Europe, not by fertility dynamics per se.
+
+Within Lebanon's own time series, the fertility--participation relationship is at best coincidental. Fertility fell steadily throughout 1990--2024 (from 3.27 to 2.23 births per woman), yet participation followed a \textit{non-monotonic} path -- rising modestly until 2019 then reversing sharply. If fertility were the binding constraint, the decline from 3.27 to 2.23 over three decades should have produced far larger participation gains. The Lebanon Paradox Overview visualization makes this misalignment visually explicit: the fertility line descends smoothly while the participation line meanders, lurches upward with the economic cycle, and then collapses with the financial crisis.
+
+\subsection{Economic Conditions as a More Proximate Determinant}
+
+The comparison between Lebanon's 2005--2019 growth phase and its post-2019 collapse phase provides a natural experiment. During the growth phase, rising GDP per capita (\$1,600 to \$9,175) drove participation upward by 8.8 percentage points, entirely independent of fertility changes. During the collapse phase, falling GDP per capita erased those gains, also independently of any demographic shift. Economic conditions appear to be a considerably more proximate determinant of Lebanon's FLFPR than fertility.
+
+This is consistent with the ``economic vulnerability'' mechanism identified by \citet{majbouri2020}: in contexts where female participation is culturally constrained to formal-sector white-collar roles, economic downturns create disproportionate female layoffs, and discouraged-worker effects are stronger for women than men. The Employment Decomposition confirms this: the post-2019 decline was primarily a transition from employed participation to non-participation, not from employed to unemployed participation, suggesting that many women chose to exit the labor force entirely rather than remain unemployed.
+
+\subsection{The Structural Gap: Education Without Employment}
+
+The education--participation scatter (Figure~\ref{fig:paradox_scatter}) reveals that Lebanon's women are accumulating educational credentials that the economy is not converting into employment. This represents a structural inefficiency that cannot be remedied by further demographic change alone. Lebanon's tertiary enrollment is broadly similar to that of non-Arab comparators with FLFPR two to three times higher. The gap between these groups is not educational attainment -- it is the conversion rate from education to employment, driven by formal sector composition, occupational segregation, gender norms around appropriate female employment, and the absence of affordable childcare and flexible work structures.
+
+\subsection{The MENA Paradox: Confirmed}
+
+Lebanon fits the MENA paradox definition precisely. It exhibits simultaneously: (1) rising female educational attainment; (2) falling fertility; (3) stagnant or weakly rising FLFPR that remains far below income-comparable non-Arab peers; and (4) a female unemployment rate that is structurally elevated, meaning even willing participants face barriers to employment. The Country Comparison Heatmap and Cross-Country Trends chart together make this configuration visible in comparative context: Lebanon's profile is not unique within the Arab group, but it is uniquely severe in the aftermath of the 2019 collapse.
+
+% ─────────────────────────────────────────────────────────
+\section{Conclusion}
+\label{sec:conclusion}
+
+This report has systematically addressed the five sub-questions and overarching research question of the Lebanon MENA Paradox project. The principal findings are as follows.
+
+\textbf{Fertility and participation trends} (Section~\ref{sec:trends}): Lebanon's TFR fell by 1.04 births per woman between 1990 and 2024, while FLFPR rose by only 4.2 percentage points over the same period, climbing to 29.3\% by 2019 before collapsing to 22.2\% in the wake of the financial crisis. Comparator trends confirm a sharp Arab--non-Arab divergence, with non-Arab peers sustaining participation rates two to three times higher than Arab countries at similar development levels.
+
+\textbf{Education--participation disconnect} (Section~\ref{sec:paradox}): The paradox scatter confirms that Lebanon and its Arab peers exhibit a systematic decoupling of educational attainment and labor force participation. Lebanese women hold tertiary degrees at rates comparable to European economies, yet roughly 78\% of working-age women are outside the formal labor force. The disconnect is structural, not demographic.
+
+\textbf{GDP and participation} (Section~\ref{sec:gdp}): GDP per capita moderates but does not determine female participation in this income range. Lebanon's pre-crisis economic advantage did not translate into participation rates comparable to non-Arab peers at similar incomes, and the crisis-driven GDP collapse has eliminated that advantage entirely.
+
+\textbf{Female unemployment and the 2019 shock} (Section~\ref{sec:decomp}): The Employment Decomposition reveals that female unemployment in Lebanon was rising as a share of participation throughout the 2005--2019 growth phase -- a structural deterioration masked by headline FLFPR growth. The post-2019 collapse triggered a large transition from employment to labor market exit (discouraged workers), reversing virtually all employment-side gains since 1990. Female unemployment is a \textit{symptom} of structural exclusion, not its primary cause.
+
+\textbf{Lebanon's comparative position} (Section~\ref{sec:crosscountry}): Lebanon ranks sixth of eleven on FLFPR in 2024, slightly above the Arab group average but dramatically below all non-Arab comparators. Its GDP per capita has collapsed from the top of the Arab comparator group to near the bottom. The Country Comparison Heatmap reveals that Lebanon's current multi-indicator profile -- low participation, moderate fertility, elevated unemployment, collapsed income -- is historically unprecedented in the dataset.
+
+The policy implications are direct. Addressing Lebanon's FLFPR shortfall requires interventions that operate on the structural and institutional determinants of female employment: formal sector recovery, occupational norm shifts, childcare infrastructure, and flexible employment contracts. Demographic policies targeting fertility would be misdirected; the data show clearly that fertility is not the binding constraint. Economic stabilization is necessary but, as the pre-crisis plateau in participation demonstrated, it is not sufficient.
+
+% ─────────────────────────────────────────────────────────
+\section*{References}
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{99}
+
+\bibitem[Assaad et~al.(2020)]{assaad2020}
+Assaad, R., Hendy, R., Lassassi, M., \& Yassin, S. (2020).
+Explaining the MENA paradox: Rising educational attainment yet stagnant female labor force participation.
+\textit{Demographic Research}, \textit{43}, 817--850.
+\url{https://doi.org/10.4054/DEMRES.2020.43.28}
+
+\bibitem[Majbouri(2020)]{majbouri2020}
+Majbouri, M. (2020).
+Fertility and the puzzle of female employment in the Middle East and North Africa.
+\textit{Economics of Transition and Institutional Change}, \textit{28}(4), 931--958.
+\url{https://doi.org/10.1111/ecot.12243}
+
+\bibitem[Munzner(2014)]{munzner2014}
+Munzner, T. (2014).
+\textit{Visualization Analysis and Design}.
+CRC Press.
+
+\bibitem[Munzner(2009)]{munzner2009}
+Munzner, T. (2009).
+A nested model for visualization design and validation.
+\textit{IEEE Transactions on Visualization and Computer Graphics}, \textit{15}(6), 921--928.
+
+\bibitem[World~Bank(2024)]{worldbank2024}
+World Bank. (2024).
+\textit{World Development Indicators}.
+\url{https://data.worldbank.org}
+
+\bibitem[Zhang \& Assaad(2024)]{zhang2024}
+Zhang, H., \& Assaad, R. (2024).
+Women's access to school, educational attainment, and fertility: Evidence from Jordan.
+\textit{Journal of Development Economics}, \textit{170}, 103291.
+\url{https://doi.org/10.1016/j.jdeveco.2024.103291}
+
+\end{thebibliography}
+
+\end{document}
