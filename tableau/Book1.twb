@@ -602,9 +602,6 @@
             <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
             <column-instance column='[GDP per Capita (sqrt)]' derivation='Avg' name='[avg:GDP per Capita (sqrt):qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
-            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
           <slices>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]</column>
@@ -657,9 +654,6 @@
             <column-instance column='[Girls’ Tertiary Enrollment]' derivation='Avg' name='[avg:Girls’ Tertiary Enrollment:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
-            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
           <slices>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Lebanon_Highlight:nk]</column>
@@ -760,9 +754,6 @@
             <column-instance column='[Female Labor Force Participation Rate]' derivation='Avg' name='[avg:Female Labor Force Participation Rate:qk]' pivot='key' type='quantitative' />
             <column-instance column='[GDP per Capita (sqrt)]' derivation='Avg' name='[avg:GDP per Capita (sqrt):qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]'>
-            <groupfilter function='member' level='[none:Year:qk]' member='2024' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
           <slices>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]</column>
             <column>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Arab_Group:nk]</column>
