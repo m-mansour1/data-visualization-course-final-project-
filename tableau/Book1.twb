@@ -242,6 +242,12 @@
       <column caption='Lebanon Highlight' datatype='string' name='[Calculation_Lebanon_Highlight]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='IF [Country Code] = &quot;LBN&quot; THEN &quot;Lebanon&quot; ELSE &quot;Comparator&quot; END' />
       </column>
+      <column caption='Small Multiples Row' datatype='integer' name='[Calculation_Small_Multiples_Row]' role='dimension' type='quantitative'>
+        <calculation class='tableau' formula='CASE [Country Code] WHEN &quot;LBN&quot; THEN 1 WHEN &quot;JOR&quot; THEN 1 WHEN &quot;EGY&quot; THEN 1 WHEN &quot;TUN&quot; THEN 1 WHEN &quot;MAR&quot; THEN 2 WHEN &quot;DZA&quot; THEN 2 WHEN &quot;TUR&quot; THEN 2 WHEN &quot;IRN&quot; THEN 2 WHEN &quot;GEO&quot; THEN 3 WHEN &quot;ALB&quot; THEN 3 WHEN &quot;ARM&quot; THEN 3 END' />
+      </column>
+      <column caption='Small Multiples Column' datatype='integer' name='[Calculation_Small_Multiples_Column]' role='dimension' type='quantitative'>
+        <calculation class='tableau' formula='CASE [Country Code] WHEN &quot;LBN&quot; THEN 1 WHEN &quot;JOR&quot; THEN 2 WHEN &quot;EGY&quot; THEN 3 WHEN &quot;TUN&quot; THEN 4 WHEN &quot;MAR&quot; THEN 1 WHEN &quot;DZA&quot; THEN 2 WHEN &quot;TUR&quot; THEN 3 WHEN &quot;IRN&quot; THEN 4 WHEN &quot;GEO&quot; THEN 1 WHEN &quot;ALB&quot; THEN 2 WHEN &quot;ARM&quot; THEN 3 END' />
+      </column>
       <column caption='Unemployed FLFPR Component' datatype='real' name='[Calculation_Unemployed_FLFPR_Component]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='[Female Labor Force Participation Rate] - [Employed FLFPR]' />
       </column>
@@ -746,11 +752,11 @@
       </table>
       <simple-id uuid='{7C2FF9F2-DC5D-4D49-9D2A-DF0875127166}' />
     </worksheet>
-    <worksheet name='Cross-Country FLFPR Small Multiples'>
+    <worksheet name='Cross-Country FLFPR Trends'>
       <layout-options>
         <title>
           <formatted-text>
-            <run>Cross-Country FLFPR Small Multiples</run>
+            <run>Cross-Country FLFPR Trends</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -778,16 +784,14 @@
         </view>
         <style>
           <style-rule element='worksheet'>
-            <format attr='display-field-labels' scope='rows' value='false' />
-          </style-rule>
-          <style-rule element='table-div'>
-            <format attr='stroke-color' scope='rows' value='#ffffff' />
-          </style-rule>
-          <style-rule element='gridline'>
-            <format attr='stroke-color' scope='rows' value='#f4f4f4' />
+            <format attr='display-field-labels' scope='cols' value='false' />
           </style-rule>
           <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]' scope='rows' value='Female Labor Force Participation Rate' />
+            <format attr='width' field='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]' value='72' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='col-width' field='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' value='140' />
           </style-rule>
         </style>
         <panes>
@@ -797,11 +801,18 @@
             </view>
             <mark class='Line' />
             <encodings>
-              <color column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Calculation_Lebanon_Highlight:nk]' />
+              <color column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' />
+              <lod column='[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk]' />
             </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='line-interpolation' value='linear' />
+              </style-rule>
+            </style>
           </pane>
         </panes>
-        <rows>([federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Country Name:nk] / [federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk])</rows>
+        <rows>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[avg:Female Labor Force Participation Rate:qk]</rows>
         <cols>[federated.0tx5qf61r3pddd1emh1cn1aqc4t6].[none:Year:qk]</cols>
       </table>
       <simple-id uuid='{15D078DC-44EE-481F-B5A2-C394FCBD943F}' />
@@ -923,7 +934,7 @@
       </cards>
       <simple-id uuid='{E330BEBC-540D-43B4-8E8D-9EB89985D8AF}' />
     </window>
-    <window class='worksheet' maximized='true' name='Cross-Country FLFPR Small Multiples'>
+    <window class='worksheet' maximized='true' name='Cross-Country FLFPR Trends'>
       <cards>
         <edge name='left'>
           <strip size='160'>
