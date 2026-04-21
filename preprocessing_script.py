@@ -20,7 +20,23 @@ def clean_excel_file(input_path: Path, output_path: Path) -> None:
     cleaned_df = df.iloc[3:].reset_index(drop=True)
     cleaned_df.columns = cleaned_df.iloc[0]
     cleaned_df = cleaned_df.iloc[1:].reset_index(drop=True)
-    cleaned_df.to_excel(output_path, index=False)
+
+    id_columns = [
+        "Country Name",
+        "Country Code",
+        "Indicator Name",
+        "Indicator Code",
+    ]
+    year_columns = [column for column in cleaned_df.columns if column not in id_columns]
+
+    reshaped_df = cleaned_df.melt(
+        id_vars=id_columns,
+        value_vars=year_columns,
+        var_name="Year",
+        value_name="Value",
+    )
+    reshaped_df["Year"] = pd.to_numeric(reshaped_df["Year"], errors="coerce").astype("Int64")
+    reshaped_df.to_excel(output_path, index=False)
 
 
 def main() -> None:
