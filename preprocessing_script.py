@@ -82,11 +82,16 @@ def build_long_panel(cleaned_frames: list[pd.DataFrame]) -> pd.DataFrame:
         kind="stable",
     ).reset_index(drop=True)
 
+    # long_df["Value"] = long_df.groupby(
+    #     ["Country Code", "Indicator Code"],
+    #     group_keys=False,
+    # )["Value"].transform(lambda series: series.interpolate(limit_direction="both"))
     long_df["Value"] = long_df.groupby(
         ["Country Code", "Indicator Code"],
         group_keys=False,
-    )["Value"].transform(lambda series: series.interpolate(limit_direction="both"))
-
+    )["Value"].transform(
+        lambda series: series.interpolate(method="index", limit_area="inside")
+    )
     return long_df
 
 
