@@ -17,3 +17,14 @@ Which chart answers which:
  4 · Lebanon employment decomposition Q4
  5 · Country comparison heatmap Q5 
  6 · Cross-country FLFPR trends Q1 — comparators side
+
+
+ - ask about the interpolation (inside and both)
+ - charts
+ - validation
+ - what/how/why
+
+
+
+ - follow Tamara Munzner's rules (like do not use donuts)
+ - the scatter plot no need to start from zero, we can start from where the data starts showing
