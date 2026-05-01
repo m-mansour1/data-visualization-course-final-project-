@@ -35,7 +35,7 @@ Which chart answers which:
  - why 
 
 
- - use GDP growth, if from i
+ - use GDP growth, if comparison is on individual level ya3ne comparison ma3 education 
  - scatter plot individual level betwene the per capita and tertiary enrollment
  - look alternative websites like who or get from national estimate/ILO estimate
 
