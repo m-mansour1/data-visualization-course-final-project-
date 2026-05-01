@@ -760,12 +760,12 @@ with tab_c:
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# CHART E — LEBANON CRISIS SPOTLIGHT
+# CHART D — LEBANON CRISIS SPOTLIGHT
 # Task: {Identify, Outliers} — single-country dual-axis
 # ═════════════════════════════════════════════════════════════════════════════
 
 with tab_e:
-    st.subheader("Chart E — Lebanon Crisis Spotlight: FLFPR, TFR & GDP")
+    st.subheader("Chart D — Lebanon Crisis Spotlight: FLFPR, TFR & GDP")
     st.caption("`{Identify, Outliers}` — What was the internal mechanism of Lebanon's post-2019 break?")
 
     leb_full2 = df_raw[df_raw["Country Name"] == "Lebanon"].sort_values("Year")
@@ -773,23 +773,23 @@ with tab_e:
         (leb_full2.Year >= year_range[0]) & (leb_full2.Year <= year_range[1])
     ]
 
-    fig_e = go.Figure()
+    fig_d = go.Figure()
 
     # Crisis shading
-    fig_e.add_vrect(x0=2019, x1=2023,
+    fig_d.add_vrect(x0=2019, x1=2023,
         fillcolor=C_ANNOT, opacity=0.07, line_width=0,
         annotation_text="Economic collapse →", annotation_position="top left",
         annotation=dict(font_color=C_ANNOT, font_size=ANNOTATION_FONT_SIZE),
     )
     # Syrian refugee influx shading
-    fig_e.add_vrect(x0=2011, x1=2016,
+    fig_d.add_vrect(x0=2011, x1=2016,
         fillcolor="#F59E0B", opacity=0.07, line_width=0,
         annotation_text="Syrian influx →", annotation_position="top left",
         annotation=dict(font_color="#B45309", font_size=ANNOTATION_FONT_SIZE),
     )
 
     # FLFPR — left axis
-    fig_e.add_trace(go.Scatter(
+    fig_d.add_trace(go.Scatter(
         x=leb_full2.Year,
         y=leb_full2["Female Labor Force Participation Rate"],
         line=dict(color=C_LEB, width=3),
@@ -799,7 +799,7 @@ with tab_e:
     ))
 
     # TFR — left axis (same scale not possible, use secondary)
-    fig_e.add_trace(go.Scatter(
+    fig_d.add_trace(go.Scatter(
         x=leb_full2.Year,
         y=leb_full2["Total Fertility Rate"],
         line=dict(color="#10B981", width=2.5, dash="dash"),
@@ -810,7 +810,7 @@ with tab_e:
 
     # GDP — right axis
     if "GDP per Capita" in leb_full2.columns:
-        fig_e.add_trace(go.Scatter(
+        fig_d.add_trace(go.Scatter(
             x=leb_full2.Year,
             y=leb_full2["GDP per Capita"],
             line=dict(color=C_GDP, width=2, dash="dot"),
@@ -820,7 +820,7 @@ with tab_e:
 
     # Peak FLFPR marker
     pk = leb_full2.loc[leb_full2["Female Labor Force Participation Rate"].idxmax()]
-    fig_e.add_trace(go.Scatter(
+    fig_d.add_trace(go.Scatter(
         x=[pk.Year], y=[pk["Female Labor Force Participation Rate"]],
         mode="markers", yaxis="y1",
         marker=dict(color=C_LEB, size=14, symbol="star"),
@@ -828,7 +828,7 @@ with tab_e:
         hovertemplate=f"<b>Peak {int(pk.Year)}</b><br>FLFPR: %{{y:.1f}}%<extra></extra>",
     ))
 
-    fig_e.update_layout(
+    fig_d.update_layout(
         height=CHART_HEIGHT,
         plot_bgcolor="white",
         paper_bgcolor="white",
@@ -881,8 +881,8 @@ with tab_e:
         ),
     )
     
-    fig_e = force_axis_fonts(fig_e)
-    st.plotly_chart(fig_e, use_container_width=True)
+    fig_d = force_axis_fonts(fig_d)
+    st.plotly_chart(fig_d, use_container_width=True)
 
     col1, col2 = st.columns(2)
     col1.info(
