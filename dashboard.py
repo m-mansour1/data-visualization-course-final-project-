@@ -6,8 +6,8 @@ Framework: Tamara Munzner — Visualization Analysis & Design (2014)
 
 import streamlit as st
 import plotly.graph_objects as go
-import pandas as pd
 import numpy as np
+import pandas as pd
 import os
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -21,6 +21,44 @@ st.set_page_config(
     page_icon="🇱🇧",
 )
 
+st.markdown(
+    """
+    <style>
+    h1 {
+        font-size: 42px !important;
+        font-weight: 800 !important;
+    }
+
+    h2, h3 {
+        font-size: 30px !important;
+        font-weight: 750 !important;
+    }
+
+    .stCaption, [data-testid="stCaptionContainer"] {
+        font-size: 18px !important;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        font-size: 18px !important;
+        font-weight: 650 !important;
+    }
+
+    [data-testid="stMetricLabel"] {
+        font-size: 17px !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 30px !important;
+    }
+
+    [data-testid="stMetricDelta"] {
+        font-size: 16px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # ─────────────────────────────────────────────────────────────────────────────
 # COLOUR PALETTE  (Munzner: ≤6–8 hues; we use 2 categorical + neutral band)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -32,8 +70,88 @@ C_ANNOT = "#3B82F6"   # event annotations — blue (distinct from Lebanon orange
 C_GDP   = "#8B5CF6"   # GDP line on spotlight — purple (distinct from both)
 
 # ─────────────────────────────────────────────────────────────────────────────
+# GLOBAL FONT / CHART SIZE SETTINGS
+# ─────────────────────────────────────────────────────────────────────────────
+
+FONT_FAMILY = "Arial, sans-serif"
+
+TITLE_FONT_SIZE = 26
+SUBTITLE_FONT_SIZE = 18
+
+AXIS_TICK_SIZE = 18
+AXIS_TITLE_SIZE = 21
+LEGEND_FONT_SIZE = 18
+ANNOTATION_FONT_SIZE = 17
+HOVER_FONT_SIZE = 16
+CHART_HEIGHT = 620
+
+CHART_HEIGHT = 620
+
+# ─────────────────────────────────────────────────────────────────────────────
 # APPROXIMATE DATA  (replace with pd.read_excel("merged_panel_wide.xlsx"))
 # ─────────────────────────────────────────────────────────────────────────────
+
+def force_axis_fonts(fig):
+    fig.update_xaxes(
+        tickfont=dict(size=AXIS_TICK_SIZE, family=FONT_FAMILY, color="#374151"),
+        title_font=dict(size=AXIS_TITLE_SIZE, family=FONT_FAMILY, color="#374151")
+    )
+    fig.update_yaxes(
+        tickfont=dict(size=AXIS_TICK_SIZE, family=FONT_FAMILY, color="#374151"),
+        title_font=dict(size=AXIS_TITLE_SIZE, family=FONT_FAMILY, color="#374151")
+    )
+    fig.update_layout(
+        legend=dict(font=dict(size=21, family=FONT_FAMILY)),
+        font=dict(size=AXIS_TICK_SIZE, family=FONT_FAMILY),
+        margin=dict(l=90, r=50, t=80, b=100)
+    )
+    fig.update_annotations(font=dict(size=19, family=FONT_FAMILY))
+    return fig
+
+def apply_large_chart_fonts(fig, height=CHART_HEIGHT, showlegend=True):
+    """Apply consistent large fonts to all Plotly charts."""
+    fig.update_layout(
+        height=height,
+        font=dict(
+            family=FONT_FAMILY,
+            size=AXIS_TICK_SIZE,
+            color="#1F2937"
+        ),
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.10,
+            xanchor="right",
+            x=1,
+            font=dict(size=LEGEND_FONT_SIZE),
+            title_font=dict(size=LEGEND_FONT_SIZE),
+        ),
+        xaxis=dict(
+            title="Year",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
+        yaxis=dict(
+            title="Total Fertility Rate (births per woman)",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
+        hoverlabel=dict(
+            font_size=HOVER_FONT_SIZE,
+            font_family=FONT_FAMILY
+        ),
+        showlegend=showlegend,
+    )
+
+    fig.update_annotations(
+        font=dict(size=ANNOTATION_FONT_SIZE)
+    )
+
+    return fig
 
 @st.cache_data
 def load_data():
@@ -258,7 +376,7 @@ with tab_a:
         fillcolor=C_ANNOT, opacity=0.07,
         line_width=0, annotation_text="Syrian influx",
         annotation_position="top left",
-        annotation=dict(font_color=C_ANNOT, font_size=11),
+        annotation=dict(font_color=C_ANNOT, font_size=ANNOTATION_FONT_SIZE),
     )
     # Lebanon line
     fig_a.add_trace(go.Scatter(
@@ -278,15 +396,17 @@ with tab_a:
     ))
 
     fig_a.update_layout(
-        height=480,
-        plot_bgcolor="white", paper_bgcolor="white",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        xaxis=dict(title="Year", gridcolor=C_GRID, showgrid=True),
-        yaxis=dict(title="Total Fertility Rate (births per woman)", gridcolor=C_GRID, showgrid=True),
-        hovermode="x unified",
-        margin=dict(l=60, r=20, t=20, b=60),
+        height=CHART_HEIGHT,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.12,
+            xanchor="right",
+            x=1,
+            font=dict(size=LEGEND_FONT_SIZE),
+        ),
     )
-
+    fig_a = force_axis_fonts(fig_a)
     st.plotly_chart(fig_a, use_container_width=True)
 
     if show_munzner:
@@ -372,7 +492,7 @@ with tab_b:
         fillcolor=C_ANNOT, opacity=0.07,
         line_width=0, annotation_text="Economic crisis",
         annotation_position="top left",
-        annotation=dict(font_color=C_ANNOT, font_size=11),
+        annotation=dict(font_color=C_ANNOT, font_size=ANNOTATION_FONT_SIZE),
     )
     # Lebanon line
     fig_b.add_trace(go.Scatter(
@@ -398,21 +518,43 @@ with tab_b:
             fig_b.add_annotation(
                 x=2023, y=float(leb_2023_flfpr.values[0]),
                 text="Below peer Q1", showarrow=True, arrowhead=2,
-                font=dict(color=C_LEB, size=11),
+                font=dict(color=C_LEB, size=ANNOTATION_FONT_SIZE),
                 bgcolor="white", bordercolor=C_LEB,
                 ax=-60, ay=-30,
             )
 
     fig_b.update_layout(
-        height=480,
-        plot_bgcolor="white", paper_bgcolor="white",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        xaxis=dict(title="Year", gridcolor=C_GRID, showgrid=True),
-        yaxis=dict(title="FLFPR (%)", gridcolor=C_GRID, showgrid=True),
+        height=CHART_HEIGHT,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.12,
+            xanchor="right",
+            x=1,
+            font=dict(size=LEGEND_FONT_SIZE),
+        ),
+        xaxis=dict(
+            title="Year",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
+        yaxis=dict(
+            title="FLFPR (%)",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
         hovermode="x unified",
-        margin=dict(l=60, r=20, t=20, b=60),
+        hoverlabel=dict(font_size=HOVER_FONT_SIZE),
+        margin=dict(l=80, r=40, t=60, b=80),
     )
-
+    
+    fig_b = force_axis_fonts(fig_b)
     st.plotly_chart(fig_b, use_container_width=True)
 
     if show_munzner:
@@ -504,36 +646,67 @@ with tab_c:
             mode="lines+markers+text",
             line=dict(color=colour, width=width),
             marker=dict(color=colour, size=7 if is_leb else 5),
-            text=[f"{v:.1f}{unit}" for v in y_vals] if is_leb else [None]*len(y_vals),
-            textposition=["middle left", "middle center", "middle right"],
-            textfont=dict(color=C_LEB, size=11, family="monospace"),
+            text=[
+                f"{y_vals[0]:.1f}{unit}",
+                f"{y_vals[1]:.1f}{unit}",
+                ""
+            ] if is_leb else [None, None, None],            
+            textposition=["middle right", "top center", "middle left"],
+            textfont=dict(color=C_LEB, size=15, family="monospace"),
             name=country,
             showlegend=is_leb,
             hovertemplate=f"<b>{country}</b><br>%{{x}}<br>{short}: %{{y:.2f}}{unit}<extra></extra>",
             opacity=alpha,
         ))
         # End-point label for each country
-        fig_c.add_annotation(
-            x=2, y=row[2023], text=f"  {country}",
-            showarrow=False,
-            font=dict(color=C_LEB if is_leb else "#64748B",
-                      size=12 if is_leb else 9,
-                      family="sans-serif"),
-            xanchor="left",
-        )
+        # fig_c.add_annotation(
+        #     x=2, y=row[2023], text=f"  {country}",
+        #     showarrow=False,
+        #     font=dict(color=C_LEB if is_leb else "#64748B",
+        #             size=16 if is_leb else 13,
+        #             family="sans-serif"),
+        #     xanchor="left",
+        # )
+        # Only label Lebanon directly to avoid label collision
+        if is_leb:
+            fig_c.add_annotation(
+                x=2,
+                y=row[2023],
+                text="  Lebanon",
+                showarrow=False,
+                font=dict(
+                    color=C_LEB,
+                    size=18,
+                    family=FONT_FAMILY
+                ),
+                xanchor="left",
+            )
 
     fig_c.update_layout(
-        height=520,
-        plot_bgcolor="white", paper_bgcolor="white",
+        height=CHART_HEIGHT,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
         xaxis=dict(
-            tickvals=[0,1,2], ticktext=x_labels,
-            title="Snapshot year", gridcolor=C_GRID,
-            showgrid=True, zeroline=False,
+            tickvals=[0, 1, 2],
+            ticktext=x_labels,
+            title="Snapshot year",
+            gridcolor=C_GRID,
+            showgrid=True,
+            zeroline=False,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
         ),
-        yaxis=dict(title=f"{short} ({unit.strip()})", gridcolor=C_GRID, showgrid=True),
+        yaxis=dict(
+            title=f"{short} ({unit.strip()})",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
         showlegend=False,
-        margin=dict(l=60, r=140, t=20, b=60),
+        margin=dict(l=90, r=90, t=70, b=100),
         hovermode="closest",
+        hoverlabel=dict(font_size=HOVER_FONT_SIZE),
     )
     # Lebanon text annotation
     fig_c.add_annotation(
@@ -541,9 +714,10 @@ with tab_c:
             if "Fertility" in metric_choice else
             snap_df[snap_df.Country=="Lebanon"][2010].values[0] + 2,
         text="<b>Lebanon</b>", showarrow=False,
-        font=dict(color=C_LEB, size=13),
+        font=dict(color=C_LEB, size=18),
     )
-
+    
+    fig_c = force_axis_fonts(fig_c)
     st.plotly_chart(fig_c, use_container_width=True)
 
     if show_munzner:
@@ -605,13 +779,13 @@ with tab_e:
     fig_e.add_vrect(x0=2019, x1=2023,
         fillcolor=C_ANNOT, opacity=0.07, line_width=0,
         annotation_text="Economic collapse →", annotation_position="top left",
-        annotation=dict(font_color=C_ANNOT, font_size=11),
+        annotation=dict(font_color=C_ANNOT, font_size=ANNOTATION_FONT_SIZE),
     )
     # Syrian refugee influx shading
     fig_e.add_vrect(x0=2011, x1=2016,
         fillcolor="#F59E0B", opacity=0.07, line_width=0,
         annotation_text="Syrian influx →", annotation_position="top left",
-        annotation=dict(font_color="#B45309", font_size=11),
+        annotation=dict(font_color="#B45309", font_size=ANNOTATION_FONT_SIZE),
     )
 
     # FLFPR — left axis
@@ -655,31 +829,59 @@ with tab_e:
     ))
 
     fig_e.update_layout(
-        height=500,
-        plot_bgcolor="white", paper_bgcolor="white",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        height=CHART_HEIGHT,
+        plot_bgcolor="white",
+        paper_bgcolor="white",
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.12,
+            xanchor="right",
+            x=1,
+            font=dict(size=LEGEND_FONT_SIZE),
+        ),
         hovermode="x unified",
-        margin=dict(l=70, r=120, t=20, b=60),
-        xaxis=dict(title="Year", gridcolor=C_GRID, showgrid=True),
+        hoverlabel=dict(font_size=HOVER_FONT_SIZE),
+        margin=dict(l=90, r=180, t=70, b=100),
+        xaxis=dict(
+            title="Year",
+            gridcolor=C_GRID,
+            showgrid=True,
+            title_font=dict(size=AXIS_TITLE_SIZE),
+            tickfont=dict(size=AXIS_TICK_SIZE),
+        ),
         yaxis=dict(
-            title=dict(text="FLFPR (%)", font=dict(color=C_LEB)),
-            tickfont=dict(color=C_LEB), gridcolor=C_GRID,
+            title=dict(text="FLFPR (%)", font=dict(color=C_LEB, size=AXIS_TITLE_SIZE)),
+            tickfont=dict(color=C_LEB, size=AXIS_TICK_SIZE),
+            gridcolor=C_GRID,
         ),
         yaxis2=dict(
-            title=dict(text="TFR", font=dict(color="#10B981")),
-            tickfont=dict(color="#10B981"),
-            overlaying="y", side="right",
+            title=dict(
+                text="TFR",
+                font=dict(color="#10B981", size=AXIS_TITLE_SIZE)
+            ),
+            tickfont=dict(color="#10B981", size=AXIS_TICK_SIZE),
+            overlaying="y",
+            side="right",
+            position=0.92,
             showgrid=False,
         ),
+
         yaxis3=dict(
-            title=dict(text="GDP per capita (USD)", font=dict(color=C_GDP)),
-            tickfont=dict(color=C_GDP),
-            overlaying="y", side="right",
-            anchor="free", position=1.0,
+            title=dict(
+                text="GDP per capita (USD)",
+                font=dict(color=C_GDP, size=AXIS_TITLE_SIZE)
+            ),
+            tickfont=dict(color=C_GDP, size=AXIS_TICK_SIZE),
+            overlaying="y",
+            side="right",
+            anchor="free",
+            position=1.0,
             showgrid=False,
         ),
     )
-
+    
+    fig_e = force_axis_fonts(fig_e)
     st.plotly_chart(fig_e, use_container_width=True)
 
     col1, col2 = st.columns(2)
